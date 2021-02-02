@@ -62,7 +62,7 @@ export default class Todolist extends Component {
 
   render() {
     return (
-      <Container style={{ margin: "5vh auto" }}>
+      <Container className="flex justify-content-center mx-5">
         <TaskInput
           changed={this.onTaskInputHandler}
           submit={this.onAddTaskClickHandler}
