@@ -1,11 +1,11 @@
 import { Switch, Route } from "react-router-dom";
-import Toolbar from "../Toolbar/Toolbar";
-import TodoList from "../../../containers/TodoList/Todolist";
-import Signup from "../../../containers/Auth/Signup/Signup";
+import Toolbar from "../../components/Toolbar/Toolbar";
+import TodoList from "../TodoList/Todolist";
+import Signup from "../Auth/Signup/Signup";
 import { Container } from "react-bootstrap";
-import Login from "../../../containers/Auth/Login/Login";
-import ForgotPassword from "../../../containers/Auth/ForgotPassword/ForgotPassword";
-import Logout from "../../../containers/Auth/Logout/Logout";
+import Login from "../Auth/Login/Login";
+import ForgotPassword from "../Auth/ForgotPassword/ForgotPassword";
+import Logout from "../Auth/Logout/Logout";
 const Layout = () => {
   return (
     <>

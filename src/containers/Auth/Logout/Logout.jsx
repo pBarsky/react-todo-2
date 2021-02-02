@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useAuth } from "../../../contexts/authContext";
 import { Redirect } from "react-router-dom";
-import { Alert, Button, Card, Container, Form } from "react-bootstrap";
+import { Alert, Button, Card, Container, Form, Spinner } from "react-bootstrap";
 
 const Logout = () => {
   const { logout, currentUser } = useAuth();
@@ -25,6 +25,14 @@ const Logout = () => {
       <div className="w-100" style={{ maxWidth: "400px" }}>
         <Card>
           <Card.Body>
+            <h3 className="text-center mb-4">Press the button to log out. </h3>
+            {loading && (
+              <div className="text-center mb-4">
+                <Spinner animation="border" role="status">
+                  <span className="sr-only">Loading...</span>
+                </Spinner>
+              </div>
+            )}
             {error && <Alert variant="danger">{error}</Alert>}
             <Form onSubmit={handleSubmit}>
               <Button disabled={loading} className="w-100" type="submit">

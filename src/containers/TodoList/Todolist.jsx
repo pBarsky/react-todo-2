@@ -1,7 +1,7 @@
 import { Component } from "react";
 import { Container } from "react-bootstrap";
 import Todos from "../../components/Todos/Todos";
-import TaskInput from "../../components/UI/Forms/TaskInput/TaskInput";
+import TaskInput from "../../components/Forms/TaskInput/TaskInput";
 import { v1 as uuidv1 } from "uuid";
 
 export default class Todolist extends Component {
