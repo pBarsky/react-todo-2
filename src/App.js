@@ -1,15 +1,18 @@
-import { BrowserRouter } from "react-router-dom";
-import Layout from "./components/UI/Layout/Layout";
-import { AuthProvider } from "./contexts/authContext";
+import { BrowserRouter } from 'react-router-dom'
+import Layout from './containers/Layout/Layout'
+import { AuthProvider } from './contexts/authContext'
+import { DbProvider } from './contexts/dbContext'
 
-function App() {
+function App () {
   return (
     <AuthProvider>
-      <BrowserRouter basename={process.env.REACT_APP_BASE_NAME}>
-        <Layout />
-      </BrowserRouter>
+      <DbProvider>
+        <BrowserRouter basename={process.env.REACT_APP_BASE_NAME}>
+          <Layout />
+        </BrowserRouter>
+      </DbProvider>
     </AuthProvider>
-  );
+  )
 }
 
-export default App;
+export default App
