@@ -1,5 +1,6 @@
 import { useEffect, createContext, useContext, useState } from 'react'
 
+import { v1 as uuid } from 'uuid'
 import { database } from '../firebase'
 import { useAuth } from './authContext'
 
@@ -27,6 +28,7 @@ export const DbProvider = ({ children }) => {
    */
   const getAllAsync = async (limit = 15, last = null) => {
     // TODO: add offset and limit
+    if (!db) return null
     try {
       const res = await db.get()
       return res.val()
@@ -41,7 +43,7 @@ export const DbProvider = ({ children }) => {
    * @returns {string | null} returns task id
    */
   const createAsync = async (data) => {
-    if (!db) return null
+    if (!db) return uuid()
     try {
       const res = await db.push(data)
       return res.path.pieces_[res.path.pieces_.length - 1]
@@ -55,7 +57,7 @@ export const DbProvider = ({ children }) => {
    * @param {Todo} data - task data
    */
   const updateAsync = async (key, data) => {
-    if (!db) return false
+    if (!db) return true
     try {
       await db.child(key).update(data)
     } catch {
@@ -68,7 +70,7 @@ export const DbProvider = ({ children }) => {
    * @param {string} key - task id
    */
   const removeAsync = async (key) => {
-    if (!db) return false
+    if (!db) return true
     try {
       await db.child(key).remove()
     } catch {
@@ -78,7 +80,7 @@ export const DbProvider = ({ children }) => {
   }
 
   const removeAllAsync = async () => {
-    if (!db) return false
+    if (!db) return true
     try {
       await db.remove()
     } catch {

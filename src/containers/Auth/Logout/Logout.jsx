@@ -1,28 +1,28 @@
-import { useState } from "react";
-import { useAuth } from "../../../contexts/authContext";
-import { Redirect } from "react-router-dom";
-import { Alert, Button, Card, Container, Form, Spinner } from "react-bootstrap";
+import { useState } from 'react'
+import { useAuth } from '../../../contexts/authContext'
+import { Redirect } from 'react-router-dom'
+import { Alert, Button, Card, Container, Form, Spinner } from 'react-bootstrap'
 
 const Logout = () => {
-  const { logout, currentUser } = useAuth();
-  const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
+  const { logout, currentUser } = useAuth()
+  const [error, setError] = useState('')
+  const [loading, setLoading] = useState(false)
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
     try {
-      setError("");
-      setLoading(true);
-      await logout();
+      setError('')
+      setLoading(true)
+      await logout()
     } catch {
-      setError("Failed to log out.");
+      setError('Failed to log out.')
     }
-    setLoading(false);
-  };
+    setLoading(false)
+  }
 
   return (
     <Container className="d-flex align-items-center justify-content-center mt-3">
-      <div className="w-100" style={{ maxWidth: "400px" }}>
+      <div className="w-100" style={{ maxWidth: '400px' }}>
         <Card>
           <Card.Body>
             <h3 className="text-center mb-4">Press the button to log out. </h3>
@@ -44,7 +44,7 @@ const Logout = () => {
       </div>
       {!loading && !currentUser && <Redirect to="/login" />}
     </Container>
-  );
-};
+  )
+}
 
-export default Logout;
+export default Logout

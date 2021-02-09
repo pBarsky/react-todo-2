@@ -1,31 +1,31 @@
-import { useRef, useState } from "react";
-import { Alert, Button, Card, Container, Form, Spinner } from "react-bootstrap";
-import { Link, Redirect } from "react-router-dom";
-import { useAuth } from "../../../contexts/authContext";
+import { useRef, useState } from 'react'
+import { Alert, Button, Card, Container, Form, Spinner } from 'react-bootstrap'
+import { Link, Redirect } from 'react-router-dom'
+import { useAuth } from '../../../contexts/authContext'
 
 const Login = () => {
-  const emailRef = useRef();
-  const passwordRef = useRef();
-  const { login, currentUser } = useAuth();
-  const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
+  const emailRef = useRef()
+  const passwordRef = useRef()
+  const { login, currentUser } = useAuth()
+  const [error, setError] = useState('')
+  const [loading, setLoading] = useState(false)
 
-  async function handleSubmit(e) {
-    e.preventDefault();
+  async function handleSubmit (e) {
+    e.preventDefault()
 
     try {
-      setError("");
-      setLoading(true);
-      await login(emailRef.current.value, passwordRef.current.value);
+      setError('')
+      setLoading(true)
+      await login(emailRef.current.value, passwordRef.current.value)
     } catch {
-      setError("Failed to sign in.");
+      setError('Failed to sign in.')
     }
-    setLoading(false);
+    setLoading(false)
   }
 
   return (
     <Container className="d-flex align-items-center justify-content-center mt-3">
-      <div className="w-100" style={{ maxWidth: "400px" }}>
+      <div className="w-100" style={{ maxWidth: '400px' }}>
         <Card>
           <Card.Body>
             <h2 className="text-center mb-4">Log in</h2>
@@ -71,7 +71,7 @@ const Login = () => {
       </div>
       {!loading && currentUser && <Redirect to="/" />}
     </Container>
-  );
-};
+  )
+}
 
-export default Login;
+export default Login

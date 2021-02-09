@@ -1,23 +1,25 @@
-import { Button, Nav, Navbar } from "react-bootstrap";
-import { LinkContainer } from "react-router-bootstrap";
-import { useAuth } from "../../contexts/authContext";
+import { Button, Nav, Navbar } from 'react-bootstrap'
+import { LinkContainer } from 'react-router-bootstrap'
+import { useAuth } from '../../contexts/authContext'
 
 const Toolbar = () => {
-  const { currentUser } = useAuth();
+  const { currentUser } = useAuth()
 
-  const authAction = !currentUser ? (
+  const authAction = !currentUser
+    ? (
     <LinkContainer to="/signup">
       <Nav.Link>
         <Button variant="outline-primary">Register</Button>
       </Nav.Link>
     </LinkContainer>
-  ) : (
+      )
+    : (
     <LinkContainer to="/logout">
       <Nav.Link>
         <Button variant="outline-primary">Logout</Button>
       </Nav.Link>
     </LinkContainer>
-  );
+      )
   const navBar = (
     <>
       {currentUser && (
@@ -30,7 +32,7 @@ const Toolbar = () => {
       )}
       {authAction}
     </>
-  );
+  )
   return (
     <Navbar bg="light" variant="light">
       <LinkContainer to="/">
@@ -38,7 +40,7 @@ const Toolbar = () => {
       </LinkContainer>
       <Nav className="ml-auto flex align-items-center">{navBar}</Nav>
     </Navbar>
-  );
-};
+  )
+}
 
-export default Toolbar;
+export default Toolbar

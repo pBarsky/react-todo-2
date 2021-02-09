@@ -1,9 +1,9 @@
-import { Form, Col, Row, Button } from "react-bootstrap";
-import PropTypes from "prop-types";
+import { Form, Col, Row, Button } from 'react-bootstrap'
+import PropTypes from 'prop-types'
 
 const TaskInput = (props) => {
   return (
-    <Form style={{ margin: "3vh auto" }} onSubmit={props.submit}>
+    <Form style={{ margin: '3vh auto' }} onSubmit={props.submit}>
       <Row>
         <Col>
           <Form.Control
@@ -19,13 +19,13 @@ const TaskInput = (props) => {
         </Col>
       </Row>
     </Form>
-  );
-};
+  )
+}
 
 TaskInput.propTypes = {
   taskName: PropTypes.string.isRequired,
   changed: PropTypes.func.isRequired,
-  submit: PropTypes.func.isRequired,
-};
+  submit: PropTypes.func.isRequired
+}
 
-export default TaskInput;
+export default TaskInput

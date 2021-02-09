@@ -1,32 +1,32 @@
-import { useRef, useState } from "react";
-import { Alert, Button, Card, Container, Form } from "react-bootstrap";
-import { Link } from "react-router-dom";
-import { useAuth } from "../../../contexts/authContext";
+import { useRef, useState } from 'react'
+import { Alert, Button, Card, Container, Form } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
+import { useAuth } from '../../../contexts/authContext'
 
 const ForgotPassword = () => {
-  const emailRef = useRef();
-  const { resetPassword } = useAuth();
-  const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [message, setMessage] = useState("");
-  async function handleSubmit(e) {
-    e.preventDefault();
+  const emailRef = useRef()
+  const { resetPassword } = useAuth()
+  const [error, setError] = useState('')
+  const [loading, setLoading] = useState(false)
+  const [message, setMessage] = useState('')
+  async function handleSubmit (e) {
+    e.preventDefault()
 
     try {
-      setMessage("");
-      setError("");
-      setLoading(true);
-      await resetPassword(emailRef.current.value);
-      setMessage("Check your inbox for further instructions");
+      setMessage('')
+      setError('')
+      setLoading(true)
+      await resetPassword(emailRef.current.value)
+      setMessage('Check your inbox for further instructions')
     } catch {
-      setError("Failed to send password reset email.");
+      setError('Failed to send password reset email.')
     }
-    setLoading(false);
+    setLoading(false)
   }
 
   return (
     <Container className="d-flex align-items-center justify-content-center mt-3">
-      <div className="w-100" style={{ maxWidth: "400px" }}>
+      <div className="w-100" style={{ maxWidth: '400px' }}>
         <Card>
           <Card.Body>
             <h2 className="text-center mb-4">Password reset</h2>
@@ -52,7 +52,7 @@ const ForgotPassword = () => {
         </div>
       </div>
     </Container>
-  );
-};
+  )
+}
 
-export default ForgotPassword;
+export default ForgotPassword

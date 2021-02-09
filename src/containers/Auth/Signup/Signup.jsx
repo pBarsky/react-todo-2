@@ -1,38 +1,38 @@
-import { useRef, useState } from "react";
-import { Alert, Button, Card, Container, Form, Spinner } from "react-bootstrap";
-import { Link, Redirect } from "react-router-dom";
-import { useAuth } from "../../../contexts/authContext";
+import { useRef, useState } from 'react'
+import { Alert, Button, Card, Container, Form, Spinner } from 'react-bootstrap'
+import { Link, Redirect } from 'react-router-dom'
+import { useAuth } from '../../../contexts/authContext'
 
 const Signup = () => {
-  const emailRef = useRef();
-  const passwordRef = useRef();
-  const passwordConfirmRef = useRef();
-  const { signup, currentUser } = useAuth();
-  const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
+  const emailRef = useRef()
+  const passwordRef = useRef()
+  const passwordConfirmRef = useRef()
+  const { signup, currentUser } = useAuth()
+  const [error, setError] = useState('')
+  const [loading, setLoading] = useState(false)
 
-  async function handleSubmit(e) {
-    e.preventDefault();
+  async function handleSubmit (e) {
+    e.preventDefault()
 
-    //TODO: change placeholder validation
+    // TODO: change placeholder validation
 
     if (passwordRef.current.value !== passwordConfirmRef.current.value) {
-      return setError("Passwords do not match");
+      return setError('Passwords do not match')
     }
 
     try {
-      setError("");
-      setLoading(true);
-      await signup(emailRef.current.value, passwordRef.current.value);
+      setError('')
+      setLoading(true)
+      await signup(emailRef.current.value, passwordRef.current.value)
     } catch {
-      setError("Failed to create an account.");
+      setError('Failed to create an account.')
     }
-    setLoading(false);
+    setLoading(false)
   }
 
   return (
     <Container className="d-flex align-items-center justify-content-center mt-3">
-      <div className="w-100" style={{ maxWidth: "400px" }}>
+      <div className="w-100" style={{ maxWidth: '400px' }}>
         <Card>
           <Card.Body>
             <h2 className="text-center mb-4">Sign up</h2>
@@ -84,7 +84,7 @@ const Signup = () => {
       </div>
       {!loading && currentUser && <Redirect to="/" />}
     </Container>
-  );
-};
+  )
+}
 
-export default Signup;
+export default Signup

@@ -1,7 +1,7 @@
-import PropTypes from "prop-types";
-import { Form } from "react-bootstrap";
-import { ListGroupItem, Button } from "react-bootstrap";
-import styles from "./Todo.module.css";
+import PropTypes from 'prop-types'
+import { Form, ListGroupItem, Button } from 'react-bootstrap'
+
+import styles from './Todo.module.css'
 
 const Todo = (props) => {
   return (
@@ -16,7 +16,7 @@ const Todo = (props) => {
       />
       <span
         className={
-          props.done ? [styles.crossedOut, "text-muted"].join(" ") : null
+          props.done ? [styles.crossedOut, 'text-muted'].join(' ') : null
         }
       >
         {props.name}
@@ -30,13 +30,13 @@ const Todo = (props) => {
         X
       </Button>
     </ListGroupItem>
-  );
-};
+  )
+}
 Todo.propTypes = {
   name: PropTypes.string.isRequired,
   done: PropTypes.bool.isRequired,
   onTaskChecked: PropTypes.func.isRequired,
   onTaskDeleted: PropTypes.func.isRequired,
-  id: PropTypes.string.isRequired,
-};
-export default Todo;
+  id: PropTypes.string.isRequired
+}
+export default Todo
