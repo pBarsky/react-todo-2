@@ -6,7 +6,6 @@ import { useEffect, useState } from 'react'
 import { useDb } from '../../contexts/dbContext'
 import { useAuth } from '../../contexts/authContext'
 import { Link } from 'react-router-dom'
-import Modal from '../../components/Modal/Modal'
 
 const Todolist = (props) => {
   const [tasks, setTasks] = useState({})
