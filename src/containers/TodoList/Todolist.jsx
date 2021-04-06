@@ -1,13 +1,12 @@
 import { Alert, Container } from 'react-bootstrap'
 import Todos from '../../components/Todos/Todos'
 import TaskInput from '../../components/Forms/TaskInput/TaskInput'
-// import { v1 as uuidv1 } from 'uuid'
 import { useEffect, useState } from 'react'
 import { useDb } from '../../contexts/dbContext'
 import { useAuth } from '../../contexts/authContext'
 import { Link } from 'react-router-dom'
 
-const Todolist = (props) => {
+const Todolist = () => {
   const [tasks, setTasks] = useState({})
   const [taskInputValue, setTaskInputValue] = useState('')
   const [canAdd, setCanAdd] = useState(false)
@@ -15,6 +14,7 @@ const Todolist = (props) => {
   const [infoRegister, setInfoRegister] = useState(true)
   const { createAsync, removeAsync, getAllAsync } = useDb()
   const { currentUser } = useAuth()
+
   const onTaskInputHandler = ({ target }) => {
     setTaskInputValue(target.value)
     setCanAdd(validate(target.value))
@@ -62,7 +62,7 @@ const Todolist = (props) => {
       setError('Cannot remove task on the server.')
       return
     }
-    const updatedTasks = Object.entries(tasks).filter(([key, val]) => {
+    const updatedTasks = Object.entries(tasks).filter(([key, _]) => {
       return key !== id
     })
     setTasks(Object.fromEntries(updatedTasks))
@@ -88,7 +88,6 @@ const Todolist = (props) => {
         onTaskChecked={onTaskDoneHandler}
         onTaskDeleted={onTaskDeleteHandler}
       />
-      {/* <button onClick={dupa}>CLick me</button> */}
     </Container>
   )
 }

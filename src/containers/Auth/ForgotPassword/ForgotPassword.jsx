@@ -9,6 +9,7 @@ const ForgotPassword = () => {
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
   const [message, setMessage] = useState('')
+
   async function handleSubmit (e) {
     e.preventDefault()
 
@@ -35,7 +36,7 @@ const ForgotPassword = () => {
             <Form onSubmit={handleSubmit}>
               <Form.Group id="email">
                 <Form.Label>Email</Form.Label>
-                <Form.Control type="email" required ref={emailRef} />
+                <Form.Control type="email" required ref={emailRef}/>
               </Form.Group>
 
               <Button disabled={loading} className="w-100" type="submit">
