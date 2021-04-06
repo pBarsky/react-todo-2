@@ -7,7 +7,7 @@ function App () {
   return (
     <AuthProvider>
       <DbProvider>
-        <HashRouter basename={process.env.PUBLIC_URL}>
+        <HashRouter basename='/'>
           <Layout />
         </HashRouter>
       </DbProvider>
