@@ -1,12 +1,12 @@
-import { ListGroup } from 'react-bootstrap'
+import { CardColumns } from 'react-bootstrap'
 import PropTypes from 'prop-types'
 import Todo from './Todo/Todo'
 
-const Todos = (props) => {
+const Todos = ({ onTaskChecked, onTaskDeleted, tasks, onSelectTask }) => {
   return (
-    <ListGroup variant="flush">
-      {Object.keys(props.tasks).map((key, idx) => {
-        const { name, done } = props.tasks[key]
+    <CardColumns>
+      {Object.keys(tasks).map((key, idx) => {
+        const { name, done } = tasks[key]
         const id = key
         return (
           <Todo
@@ -14,12 +14,13 @@ const Todos = (props) => {
             name={name}
             done={done}
             id={id}
-            onTaskChecked={(event) => props.onTaskChecked(event, id)}
-            onTaskDeleted={(event) => props.onTaskDeleted(id)}
+            onTaskChecked={(event) => onTaskChecked(event, id)}
+            onTaskDeleted={(_) => onTaskDeleted(id)}
+            onTaskSelect={onSelectTask}
           />
         )
       })}
-    </ListGroup>
+    </CardColumns>
   )
 }
 

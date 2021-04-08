@@ -1,35 +1,50 @@
 import PropTypes from 'prop-types'
-import { Form, ListGroupItem, Button } from 'react-bootstrap'
+import { Button, Card, Form } from 'react-bootstrap'
 
 import styles from './Todo.module.css'
 
-const Todo = (props) => {
+const Todo = ({ done, id, name, onTaskChecked, onTaskDeleted, onTaskSelect }) => {
   return (
-    <ListGroupItem className={styles.Todo}>
-      <Form.Check
-        inline
-        type="checkbox"
-        custom
-        id={`taskDone${props.id}`}
-        onChange={props.onTaskChecked}
-        checked={props.done}
-      />
-      <span
-        className={
-          props.done ? [styles.crossedOut, 'text-muted'].join(' ') : null
-        }
-      >
-        {props.name}
+    <Card>
+      <Card.Header>
+        <Form.Check
+          inline
+          type="checkbox"
+          custom
+          id={`taskDone${id}`}
+          onChange={onTaskChecked}
+          checked={done}
+          label="Done?"
+        />
+      </Card.Header>
+      <Card.Body>
+        <span
+          className={
+            done ? [styles.crossedOut, 'text-muted'].join(' ') : null
+          }
+        >
+        {name}
       </span>
-      <Button
-        size="sm"
-        className={styles.DeleteButton}
-        variant="outline-danger"
-        onClick={props.onTaskDeleted}
-      >
-        X
-      </Button>
-    </ListGroupItem>
+      </Card.Body>
+      <Card.Footer className="d-flex">
+        <Button
+          size="sm"
+          variant="info"
+          onClick={() => onTaskSelect(id)}
+          className="flex-grow-1"
+        >
+          Edit
+        </Button>
+        <Button
+          size="sm"
+          className="ml-4 w-25"
+          variant="danger"
+          onClick={onTaskDeleted}
+        >
+          X
+        </Button>
+      </Card.Footer>
+    </Card>
   )
 }
 Todo.propTypes = {

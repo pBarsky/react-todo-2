@@ -17,8 +17,8 @@ const Login = () => {
       setError('')
       setLoading(true)
       await login(emailRef.current.value, passwordRef.current.value)
-    } catch {
-      setError('Failed to sign in.')
+    } catch (error) {
+      setError(error.message)
     }
     setLoading(false)
   }

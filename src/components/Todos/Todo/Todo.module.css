@@ -1,12 +1,3 @@
-.Todo {
-  display: flex;
-  align-items: center;
-}
-
-.DeleteButton {
-  margin-left: auto;
-}
-
 .crossedOut {
   text-decoration: line-through;
 }
