@@ -2,6 +2,7 @@ import PropTypes from 'prop-types'
 import { Button, Card, Form } from 'react-bootstrap'
 
 import styles from './Todo.module.css'
+import { X } from 'react-bootstrap-icons'
 
 const Todo = ({ done, id, name, onTaskChecked, onTaskDeleted, onTaskSelect }) => {
   return (
@@ -33,7 +34,7 @@ const Todo = ({ done, id, name, onTaskChecked, onTaskDeleted, onTaskSelect }) =>
           onClick={() => onTaskSelect(id)}
           className="flex-grow-1"
         >
-          Edit
+          <strong>Edit</strong>
         </Button>
         <Button
           size="sm"
@@ -41,7 +42,7 @@ const Todo = ({ done, id, name, onTaskChecked, onTaskDeleted, onTaskSelect }) =>
           variant="danger"
           onClick={onTaskDeleted}
         >
-          X
+          {<X style={{ fontSize: '2rem' }}/>}
         </Button>
       </Card.Footer>
     </Card>

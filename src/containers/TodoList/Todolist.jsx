@@ -9,19 +9,12 @@ import TodoEdit from '../TodoEdit/TodoEdit'
 
 const Todolist = () => {
   const [tasks, setTasks] = useState({})
-  const [taskInputValue, setTaskInputValue] = useState('')
-  const [canAdd, setCanAdd] = useState(false)
   const [error, setError] = useState(null)
   const [infoRegister, setInfoRegister] = useState(true)
   const [selectedTask, setSelectedTask] = useState(null)
   const [editing, setEditing] = useState(false)
-  const { createAsync, removeAsync, updateAsync, getAllAsync } = useDb()
+  const { removeAsync, updateAsync, getAllAsync } = useDb()
   const { currentUser } = useAuth()
-
-  const onTaskInputHandler = ({ target }) => {
-    setTaskInputValue(target.value)
-    setCanAdd(validate(target.value))
-  }
 
   useEffect(() => {
     try {
@@ -36,10 +29,6 @@ const Todolist = () => {
       setError(e.message)
     }
   }, [])
-
-  const validate = (input) => {
-    return input !== ''
-  }
 
   const addTodo = (id, name) => {
     setTasks((oldTasks) => ({
@@ -59,18 +48,6 @@ const Todolist = () => {
     } catch (e) {
       setError(e.message)
     }
-  }
-
-  const onAddTaskClickHandler = async (event) => {
-    event.preventDefault()
-    try {
-      const id = await createAsync({ name: taskInputValue, done: false })
-      addTodo(id, taskInputValue)
-    } catch (e) {
-      setError(e.message)
-    }
-    setTaskInputValue('')
-    setCanAdd(false)
   }
 
   const enqueueToDeletion = (id) => {
@@ -118,10 +95,8 @@ const Todolist = () => {
       <Alert dismissible onClose={() => setInfoRegister(false)} variant="info"><Alert.Heading>Attention</Alert.Heading>If
         you want to save your tasks, please <Link to="/signup"><strong>sign in</strong></Link>.</Alert>}
       <TaskInput
-        changed={onTaskInputHandler}
-        submit={onAddTaskClickHandler}
-        taskName={taskInputValue}
-        disabled={!canAdd}
+        addTodo={addTodo}
+        setError={setError}
       />
       {error &&
       <Alert variant="danger" onClose={() => setError()} dismissible><Alert.Heading>Error</Alert.Heading>{error}
