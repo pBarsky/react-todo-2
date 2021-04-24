@@ -7,6 +7,7 @@ module.exports = {
     'plugin:react/recommended',
     'standard'
   ],
+  parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaFeatures: {
       jsx: true
@@ -15,10 +16,17 @@ module.exports = {
     sourceType: 'module'
   },
   plugins: [
-    'react'
+    'react',
+    '@typescript-eslint'
   ],
   rules: {
-    'react/react-in-jsx-scope': 'off',
-    'react/prop-types': 'off'
+    'no-use-before-define': 'off',
+    '@typescript-eslint/no-use-before-define': 'warn',
+    'react/jsx-uses-react': 'off',
+    'react/react-in-jsx-scope': 'off'
+  },
+  globals: {
+    React: true,
+    JSX: true
   }
 }

@@ -6,17 +6,18 @@ import { Container } from 'react-bootstrap'
 import Login from '../Auth/Login/Login'
 import ForgotPassword from '../Auth/ForgotPassword/ForgotPassword'
 import Logout from '../Auth/Logout/Logout'
+
 const Layout = () => {
   return (
     <>
-      <Toolbar />
+      <Toolbar/>
       <Container className="d-flex justify-content-center">
         <Switch>
-          <Route path="/signup" component={Signup} />
-          <Route path="/login" component={Login} />
-          <Route path="/logout" component={Logout} />
-          <Route path="/forgot-password" component={ForgotPassword} />
-          <Route path="/" exact component={TodoList} />
+          <Route path="/signup" component={Signup}/>
+          <Route path="/login" component={Login}/>
+          <Route path="/logout" component={Logout}/>
+          <Route path="/forgot-password" component={ForgotPassword}/>
+          <Route path="/" exact component={TodoList}/>
         </Switch>
       </Container>
     </>

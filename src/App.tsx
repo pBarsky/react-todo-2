@@ -1,3 +1,4 @@
+import React from 'react'
 import { HashRouter } from 'react-router-dom'
 import Layout from './containers/Layout/Layout'
 import { AuthProvider } from './contexts/authContext'
@@ -8,7 +9,7 @@ function App () {
     <AuthProvider>
       <DbProvider>
         <HashRouter basename='/'>
-          <Layout />
+          <Layout/>
         </HashRouter>
       </DbProvider>
     </AuthProvider>

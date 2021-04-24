@@ -1,11 +1,18 @@
 import { Button, Form, Modal } from 'react-bootstrap'
-import { useState } from 'react'
+import React, { useState } from 'react'
+import { Todo } from '../../models/todo'
 
-const TodoEdit = ({ selectedTodo, onExit, handleTaskUpdate }) => {
+interface Props {
+  selectedTodo: Todo;
+  onExit: () => void;
+  handleTaskUpdate: (id: string, todo: Todo) => Promise<void>
+}
+
+const TodoEdit = ({ selectedTodo, onExit, handleTaskUpdate }: Props) => {
   const [show, setShow] = useState(true)
-  const [currentTodo, setCurrentTodo] = useState({ ...selectedTodo } ?? { name: '', done: false })
+  const [currentTodo, setCurrentTodo] = useState<Todo>({ ...selectedTodo })
 
-  const handleEdit = ({ target: { value: inputValue, name, checked } }) => {
+  const handleEdit = ({ target: { value: inputValue, name, checked } }: any) => {
     const value = name === 'done' ? checked : inputValue
     setCurrentTodo(currentTodo => ({ ...currentTodo, [name]: value }))
   }
@@ -16,12 +23,12 @@ const TodoEdit = ({ selectedTodo, onExit, handleTaskUpdate }) => {
   }
 
   const save = () => {
-    handleTaskUpdate(currentTodo.id, currentTodo)
+    handleTaskUpdate(currentTodo.id, currentTodo).then()
     onExit()
     setShow(false)
   }
 
-  const submit = (e) => {
+  const submit = (e: React.FormEvent) => {
     e.preventDefault()
     save()
   }
@@ -40,7 +47,7 @@ const TodoEdit = ({ selectedTodo, onExit, handleTaskUpdate }) => {
           </Form.Group>
 
           <Form.Group controlId="formDoneCheckbox">
-            <Form.Check name="done" type="checkbox" value={currentTodo.done ?? false} label="Done"
+            <Form.Check name="done" type="checkbox" checked={currentTodo.done ?? false} label="Done"
                         onChange={handleEdit}/>
           </Form.Group>
         </Form>

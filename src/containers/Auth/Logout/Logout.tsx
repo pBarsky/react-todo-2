@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { FormEvent, useState } from 'react'
 import { useAuth } from '../../../contexts/authContext'
 import { Redirect } from 'react-router-dom'
 import { Alert, Button, Card, Container, Form, Spinner } from 'react-bootstrap'
@@ -8,7 +8,7 @@ const Logout = () => {
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
     try {
       setError('')
@@ -42,7 +42,7 @@ const Logout = () => {
           </Card.Body>
         </Card>
       </div>
-      {!loading && !currentUser && <Redirect to="/login" />}
+      {!loading && !currentUser && <Redirect to="/login"/>}
     </Container>
   )
 }
