@@ -1,21 +1,26 @@
 import { Button, Form, InputGroup, OverlayTrigger, Tooltip } from 'react-bootstrap'
-import PropTypes from 'prop-types'
-import { useState } from 'react'
+import { ChangeEvent, FormEvent, useState } from 'react'
 import { useDb } from '../../../contexts/dbContext'
 
-const TaskInput = ({ addTodo, setError }) => {
+interface Props {
+  addTodo(id: string, taskInputValue: string): void,
+
+  setError(message: string): void,
+}
+
+const TaskInput = ({ addTodo, setError }: Props) => {
   const [canAdd, setCanAdd] = useState(false)
   const [taskInputValue, setTaskInputValue] = useState('')
   const { createAsync } = useDb()
 
-  const validate = (input) => {
+  const validate = (input: string) => {
     return input !== ''
   }
 
-  const onSubmitHandler = async (event) => {
+  const onSubmitHandler = async (event: FormEvent<HTMLFormElement | HTMLElement>) => {
     event.preventDefault()
     try {
-      const id = await createAsync({ name: taskInputValue, done: false })
+      const id = await createAsync({ name: taskInputValue, done: false, id: '' })
       addTodo(id, taskInputValue)
     } catch (e) {
       setError(e.message)
@@ -24,7 +29,7 @@ const TaskInput = ({ addTodo, setError }) => {
     setCanAdd(false)
   }
 
-  const onTaskInputHandler = ({ target }) => {
+  const onTaskInputHandler = ({ target }: ChangeEvent<HTMLInputElement>) => {
     setTaskInputValue(target.value)
     setCanAdd(validate(target.value))
   }
@@ -38,7 +43,8 @@ const TaskInput = ({ addTodo, setError }) => {
           onChange={onTaskInputHandler}
           placeholder="Add your task here :)"
         />
-        <OverlayTrigger placement="bottom" defaultShow={true} overlay={<Tooltip id="dateInputTooltip">Currently disabled</Tooltip>}>
+        <OverlayTrigger placement="bottom" defaultShow={true}
+                        overlay={<Tooltip id="dateInputTooltip">Currently disabled</Tooltip>}>
           {({ ref, ...triggerHandler }) => (<Form.Control
             {...triggerHandler}
             ref={ref}
@@ -53,11 +59,6 @@ const TaskInput = ({ addTodo, setError }) => {
       </InputGroup>
     </Form>
   )
-}
-
-TaskInput.propTypes = {
-  addTodo: PropTypes.func.isRequired,
-  setError: PropTypes.func.isRequired
 }
 
 export default TaskInput

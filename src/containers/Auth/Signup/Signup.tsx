@@ -1,29 +1,29 @@
-import { useRef, useState } from 'react'
+import { FormEvent, useRef, useState } from 'react'
 import { Alert, Button, Card, Container, Form, Spinner } from 'react-bootstrap'
 import { Link, Redirect } from 'react-router-dom'
 import { useAuth } from '../../../contexts/authContext'
 
 const Signup = () => {
-  const emailRef = useRef()
-  const passwordRef = useRef()
-  const passwordConfirmRef = useRef()
+  const emailRef = useRef<HTMLInputElement>(null)
+  const passwordRef = useRef<HTMLInputElement>(null)
+  const passwordConfirmRef = useRef<HTMLInputElement>(null)
   const { signup, currentUser } = useAuth()
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
 
-  async function handleSubmit (e) {
+  async function handleSubmit (e: FormEvent) {
     e.preventDefault()
 
     // TODO: change placeholder validation
 
-    if (passwordRef.current.value !== passwordConfirmRef.current.value) {
+    if (passwordRef.current?.value !== passwordConfirmRef.current?.value) {
       return setError('Passwords do not match')
     }
 
     try {
       setError('')
       setLoading(true)
-      await signup(emailRef.current.value, passwordRef.current.value)
+      await signup(emailRef.current?.value as string, passwordRef.current?.value as string)
     } catch (error) {
       setError(error.message)
     }
@@ -82,7 +82,7 @@ const Signup = () => {
           Already have an account? <Link to="/login">Log in</Link>
         </div>
       </div>
-      {!loading && currentUser && <Redirect to="/" />}
+      {!loading && currentUser && <Redirect to="/"/>}
     </Container>
   )
 }

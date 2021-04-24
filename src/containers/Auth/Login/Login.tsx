@@ -1,22 +1,22 @@
-import { useRef, useState } from 'react'
+import { FormEvent, useRef, useState } from 'react'
 import { Alert, Button, Card, Container, Form, Spinner } from 'react-bootstrap'
 import { Link, Redirect } from 'react-router-dom'
 import { useAuth } from '../../../contexts/authContext'
 
 const Login = () => {
-  const emailRef = useRef()
-  const passwordRef = useRef()
+  const emailRef = useRef<HTMLInputElement>(null)
+  const passwordRef = useRef<HTMLInputElement>(null)
   const { login, currentUser } = useAuth()
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
 
-  async function handleSubmit (e) {
+  async function handleSubmit (e: FormEvent) {
     e.preventDefault()
 
     try {
       setError('')
       setLoading(true)
-      await login(emailRef.current.value, passwordRef.current.value)
+      await login(emailRef.current?.value as string, passwordRef.current?.value as string)
     } catch (error) {
       setError(error.message)
     }
@@ -69,7 +69,7 @@ const Login = () => {
           Need an account? <Link to="/signup">Sign up</Link>
         </div>
       </div>
-      {!loading && currentUser && <Redirect to="/" />}
+      {!loading && currentUser && <Redirect to="/"/>}
     </Container>
   )
 }
